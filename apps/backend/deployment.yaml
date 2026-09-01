@@ -16,6 +16,8 @@ spec:
     metadata:
       labels:
         app: backend
+      annotations:
+        image-version: "prisma-alpine-fix"
 
     spec:
       imagePullSecrets:
