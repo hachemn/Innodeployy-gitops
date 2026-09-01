@@ -17,7 +17,7 @@ spec:
       labels:
         app: backend
       annotations:
-        image-version: "prisma-alpine-fix"
+        image-version: "final-backend-fix"
 
     spec:
       imagePullSecrets:
