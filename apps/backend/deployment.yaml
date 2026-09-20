@@ -37,8 +37,27 @@ spec:
                 secretKeyRef:
                   name: backend-secret
                   key: JWT_SECRET
+
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
                   name: backend-secret
                   key: DATABASE_URL
+
+            - name: JENKINS_URL
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: JENKINS_URL
+
+            - name: JENKINS_USER
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: JENKINS_USER
+
+            - name: JENKINS_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: JENKINS_TOKEN
