@@ -25,7 +25,7 @@ spec:
 
       containers:
         - name: backend
-          image: ghcr.io/hachemn/innodeploy-backend:34
+          image: ghcr.io/hachemn/innodeploy-backend:35
           imagePullPolicy: Always
 
           ports:
