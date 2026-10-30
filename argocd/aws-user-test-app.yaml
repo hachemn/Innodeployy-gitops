@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: innodeploy-user-test-app-6-aws
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/hachemn/Innodeployy-gitops.git
+    targetRevision: main
+    path: apps/user-apps-aws/innodeploy-user-test-app-6
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: user-apps
+  syncPolicy: {}
