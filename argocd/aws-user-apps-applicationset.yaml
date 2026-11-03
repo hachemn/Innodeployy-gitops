@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: innodeploy-user-apps-aws
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions:
+    - missingkey=error
+
+  generators:
+    - git:
+        repoURL: https://github.com/hachemn/Innodeployy-gitops.git
+        revision: main
+        directories:
+          - path: apps/user-apps-aws/*
+          - path: apps/user-apps-aws/innodeploy-user-test-app-6
+            exclude: true
+
+  template:
+    metadata:
+      name: '{{.path.basename}}-aws'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/hachemn/Innodeployy-gitops.git
+        targetRevision: main
+        path: '{{.path.path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: user-apps
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=false
