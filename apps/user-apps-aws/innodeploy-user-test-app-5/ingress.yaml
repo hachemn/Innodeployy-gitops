@@ -6,7 +6,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: innodeploy-user-test-app-5.app.54.163.210.40.nip.io
+    - host: innodeploy-user-test-app-5.app.35.172.219.191.nip.io
       http:
         paths:
           - path: /
