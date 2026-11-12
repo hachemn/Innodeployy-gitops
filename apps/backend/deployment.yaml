@@ -17,7 +17,7 @@ spec:
       labels:
         app: backend
       annotations:
-        image-version: "aws-access-20261112"
+        image-version: "aws-access-20261112-v2"
 
     spec:
       imagePullSecrets:
@@ -25,7 +25,7 @@ spec:
 
       containers:
         - name: backend
-          image: ghcr.io/hachemn/innodeploy-backend:aws-access-20261112
+          image: ghcr.io/hachemn/innodeploy-backend:aws-access-20261112-v2
           imagePullPolicy: Always
 
           ports:
