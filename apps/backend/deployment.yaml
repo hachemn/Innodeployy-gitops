@@ -17,7 +17,7 @@ spec:
       labels:
         app: backend
       annotations:
-        image-version: "final-backend-fix"
+        image-version: "aws-access-20261112"
 
     spec:
       imagePullSecrets:
@@ -25,11 +25,16 @@ spec:
 
       containers:
         - name: backend
-          image: ghcr.io/hachemn/innodeploy-backend:55
+          image: ghcr.io/hachemn/innodeploy-backend:aws-access-20261112
           imagePullPolicy: Always
 
           ports:
             - containerPort: 3000
+
+          volumeMounts:
+            - name: backend-aws-access
+              mountPath: /var/run/backend-aws-access
+              readOnly: true
 
           env:
             - name: JWT_SECRET
@@ -67,3 +72,34 @@ spec:
 
             - name: AWS_EC2_SSH_HOST
               value: "184.195.153.127"
+
+            - name: AWS_EC2_INSTANCE_ID
+              value: "i-00dfc0cdbe38aeabc"
+
+            - name: AWS_EC2_AVAILABILITY_ZONE
+              value: "us-east-1b"
+
+            - name: AWS_REGION
+              value: "us-east-1"
+
+            - name: AWS_PROFILE
+              value: "default"
+
+            - name: AWS_SHARED_CREDENTIALS_FILE
+              value: "/var/run/backend-aws-access/credentials"
+
+            - name: AWS_EC2_SSH_KEY_PATH
+              value: "/var/run/backend-aws-access/ssh/innodeploy-key"
+
+      volumes:
+        - name: backend-aws-access
+          secret:
+            secretName: backend-aws-access
+            defaultMode: 0400
+            items:
+              - key: credentials
+                path: credentials
+              - key: ssh-private-key
+                path: ssh/innodeploy-key
+              - key: ssh-public-key
+                path: ssh/innodeploy-key.pub
